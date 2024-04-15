@@ -78,8 +78,6 @@ _все фото (c) ZeyHex_
 | 4            | PA4       | PA7        |
 
 
-Нам нужны пины dout и sclk.
-
 Меняем на нужные в конфиг-файле :
 
     [load_cell_probe]
@@ -194,7 +192,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 
 ### 5.3 Температурные датчики в каждом MCU
 
-[ZeyHex](https://t.me/ZeyHex) добавил в прошивку чтение температуры с каждого из mcu из встроенных датчиков - что дало вомзоность мониторить температуру на контроллерах стола, головы и основной платы.
+[ZeyHex](https://t.me/ZeyHex) добавил в прошивку чтение температуры с каждого из mcu из встроенных датчиков - что дало возможность мониторить температуру на контроллерах стола, головы и основной платы.
 Для включения отображения температур нужно добавить сенсоры в `printer.cfg`:
 
     [temperature_sensor mcu_temp]
@@ -231,3 +229,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 Статьи и материалы:
 - https://klipper.discourse.group/t/strain-gauge-load-cell-based-endstops/2134
 - https://github.com/Klipper3d/klipper/pull/6555
+
+___
+
+&copy; Cryo 2024 v1.0b
