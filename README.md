@@ -11,6 +11,7 @@
 ![alt text](pics/tenso_wiring5.jpg)
 ![alt text](pics/tenso_wiring6.jpg)
 ![alt text](pics/tenso_wiring7_slot.jpg)
+_все фото (c) ZeyHex_
 
 **Записать\запомнить в какой слот воткнули запараллеленные датчики!**
 
