@@ -198,7 +198,7 @@ Note - the g_code of the load cells contains a limit of nozzle temperature, abov
 
 And after adjusting, bring it back up to 140-150 degrees.
 
-### 5.3 Температурные датчики в каждом MCU
+### 5.3 Temperature sensors in all MCUs
 
 [ZeyHex](https://t.me/ZeyHex) added to the firmware reading the temperature from each of the mcu from the built-in sensors - which made it possible to monitor the temperature on the bed, nozzle and main MCUs.
 To enable temperature monitoring you need to add sensors to `printer.cfg`:
@@ -222,6 +222,78 @@ To enable temperature monitoring you need to add sensors to `printer.cfg`:
     min_temp: 0
     max_temp: 100
 
+### 5.4 Auto Z-Offset calculation with load cells probe and any BLTouch/Nicroprobe/Cartographer probe (! BETA !)
+
+For this functionality we had to patch the clipper to allow multiple probes to work simultaneously, as well as write a plugin (`lc_auto_z_offset.py`) for the klipper with GCODE command to determine Z-Offset. To enable this feature you need to use the [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) branch from the modified mainline klipper repository. 
+
+Required config:
+
+    [load_cell_probe lc]
+    sensor_type: hx711
+    dout_pin: leveling_mcu:PA4
+    sclk_pin: leveling_mcu:PA7
+    z_offset: 0.0
+    counts_per_gram: 25.39770
+    reference_tare_counts: 89146
+    safety_limit: 5000
+    trigger_force: 160
+    trigger_count: 1
+    samples: 2
+    speed: 2
+    lift_speed: 5.0
+    pullback_dist: 0.5
+    pullback_speed: 0.2
+
+    [lc_auto_z_offset]
+    center_xy_position: 150.0,150.0
+    secondary_probe: lc
+
+The key point is a **named** secondary probe, in this case a load cell probe named `lc`. And this name must be specified in the `secondary_probe` parameter in the `[lc_auto_z_offset]` section.
+
+
+Possibilities:
+- to call all commands for a probe by adding a name prefix to the command, for example a probe named `lc` can call GCode of the form LCPROBE, LCPROBE_ACCURACY and so on, while the main probe will work with standard commands (PROBE, PROBE_ACCURACY)
+- use Z-Offset autocalibration via `LC_AUTO_Z_OFFSET` command
+
+`LC_AUTO_Z_OFFSET` command parameters:
+
+`NOMOVE` - 0/1 (default 0) - do not move when executing the command to the point specified in the plugin's `center_xy_position` settings - but use the current position
+
+`SET` - 0/1 (default 0) - set the calculated Z-Offset after executing the command
+
+`SAVE` - 0/1 (default 0) - save the calculated Z-Offset to the main probe configuration
+
+The other parameters are passed directly to the PROBE command called by the plugin.
+
+Example:
+
+    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 SPEED=2
+
+In the current position, calculates Z-Offset with probe parameters of 3 samples at speed 2 and stores the calculated value in the main probe config.
+
+Output example:
+```
+    // LC_AutoZOffset: Probing main probe ...
+    // probe at 185.000,150.000 is z=0.798340
+    // probe at 185.000,150.000 is z=0.800684
+    // probe at 185.000,150.000 is z=0.799316
+    // LC_AutoZOffset: Probing nozzle probe ...
+    // probe at 150.000,150.000 is z=-0.019642
+    // probe at 150.000,150.000 is z=-0.015027
+    // probe at 150.000,150.000 is z=-0.012001
+    // LC_AutoZOffset:
+    // Nozzle: -0.016
+    // Probe: 0.799
+    // Diff: 0.815
+    // Config Manual Adjust: 0.000
+    // Total Calculated Offset: 0.815
+```
+
+**N.B.** 
+- LC_AUTO_Z_OFFSET resets the current Z-Offset to 0.0 on startup
+- warm the bed and nozzle to operating temperatures, but no higher than 150 degrees at the nozzle to avoid damaging the bed coating. The command itself does not warm the table or nozzle.
+
+
 ## 6. Credits
 
 Authors of all modifications, algorithms and improvements:
@@ -234,6 +306,7 @@ Used repos:
 - https://github.com/garethky/klipper/tree/adc-endstop
 - https://github.com/K1-Klipper/klipper
 - https://github.com/K1-Klipper/installer_script_k1_and_max
+- https://github.com/hawkeyexp/auto_offset_z
 
 References:
 - https://klipper.discourse.group/t/strain-gauge-load-cell-based-endstops/2134
@@ -241,4 +314,4 @@ References:
 
 ___
 
-&copy; Cryo 2024 v1.1b
+&copy; Cryo 2024 v1.2b

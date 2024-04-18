@@ -218,6 +218,76 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
     min_temp: 0
     max_temp: 100
 
+### 5.4 Автоопределение Z-Offset совместно с тензодатчиками и любым датчиком BLTouch/Nicroprobe/Cartographer (! BETA !)
+
+Для данного функционала пришлось пропатчить клиппер для возможности работы нескольких проб одновременно, а также написать плагин (`lc_auto_z_offset.py`) для клиппера с GCODE командой для определения Z-Offset. Чтобы включить эту возможность необходимо использовать ветку [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) из репозитория модифицированного mainline клиппера. 
+
+Используется следующий конфиг:
+
+    [load_cell_probe lc]
+    sensor_type: hx711
+    dout_pin: leveling_mcu:PA4
+    sclk_pin: leveling_mcu:PA7
+    z_offset: 0.0
+    counts_per_gram: 25.39770
+    reference_tare_counts: 89146
+    safety_limit: 5000
+    trigger_force: 160
+    trigger_count: 1
+    samples: 2
+    speed: 2
+    lift_speed: 5.0
+    pullback_dist: 0.5
+    pullback_speed: 0.2
+
+    [lc_auto_z_offset]
+    center_xy_position: 150.0,150.0
+    secondary_probe: lc
+
+Ключевой момент - именованный датчик уровня, в данном случае тензодатчик с именем `lc`. И это имя нужно указать в параметре `secondary_probe` в секции `[lc_auto_z_offset]`
+
+Это дает возможность:
+1. вызывать все команды для пробы добавляя префикс имени к команде, например проба с именем `lc` может вызывать GCode вида LCPROBE, LCPROBE_ACCURACY и так далее, при этом основная проба будет работать со стандартными командами (PROBE)
+2. использовать автокалибровку Z-Offset через команду `LC_AUTO_Z_OFFSET`
+
+Параметры команды `LC_AUTO_Z_OFFSET`:
+
+`NOMOVE` - 0/1 (default 0) - не передвигаться при выполнении команды к точке, указанной в настройках плагина `center_xy_position` - а использовать текущую позицию
+
+`SET` - 0/1 (default 0) - устанавливать вычисленный Z-Offset после выполнения команды
+
+`SAVE` - 0/1 (default 0) - сохранять вычисленный Z-Offset в конфигурацию основной пробы
+
+Остальные параметры передаются напрямую в команду PROBE вызываемую плагином.
+
+Пример:
+
+    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 SPEED=2
+
+В текущем положении вычисляет Z-Offset с параметрами проб в 3 попытки со скоростью 2 и сохраняет вычисленное значение в конфиг основной пробы.
+
+Пример вывода:
+```
+    // LC_AutoZOffset: Probing main probe ...
+    // probe at 185.000,150.000 is z=0.798340
+    // probe at 185.000,150.000 is z=0.800684
+    // probe at 185.000,150.000 is z=0.799316
+    // LC_AutoZOffset: Probing nozzle probe ...
+    // probe at 150.000,150.000 is z=-0.019642
+    // probe at 150.000,150.000 is z=-0.015027
+    // probe at 150.000,150.000 is z=-0.012001
+    // LC_AutoZOffset:
+    // Nozzle: -0.016
+    // Probe: 0.799
+    // Diff: 0.815
+    // Config Manual Adjust: 0.000
+    // Total Calculated Offset: 0.815
+```
+**N.B.** 
+- LC_AUTO_Z_OFFSET при запуске сбрасывает текущий Z-Offset в 0.0
+- грейте стол и сопло до рабочих температур, но не выше 150 градусов на сопле во избежание повреждения покрытия стола соплом. Команда сама не греет стол и сопло
+
+
 ## 6. Credits
 
 Авторы всех модификаций, алгоритмов и улучшений:
@@ -230,6 +300,8 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 - https://github.com/garethky/klipper/tree/adc-endstop
 - https://github.com/K1-Klipper/klipper
 - https://github.com/K1-Klipper/installer_script_k1_and_max
+- https://github.com/hawkeyexp/auto_offset_z
+
 
 Статьи и материалы:
 - https://klipper.discourse.group/t/strain-gauge-load-cell-based-endstops/2134
@@ -237,4 +309,4 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 
 ___
 
-&copy; Cryo 2024 v1.0b
+&copy; Cryo 2024 v1.2b
