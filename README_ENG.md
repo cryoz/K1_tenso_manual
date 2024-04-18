@@ -222,7 +222,7 @@ To enable temperature monitoring you need to add sensors to `printer.cfg`:
     min_temp: 0
     max_temp: 100
 
-### 5.4 Auto Z-Offset calculation with load cells probe and any BLTouch/Nicroprobe/Cartographer probe (! BETA !)
+### 5.4 Auto Z-Offset calculation with load cells probe and any BLTouch/Microprobe/Cartographer probe (! BETA !)
 
 For this functionality we had to patch the clipper to allow multiple probes to work simultaneously, as well as write a plugin (`lc_auto_z_offset.py`) for the klipper with GCODE command to determine Z-Offset. To enable this feature you need to use the [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) branch from the modified mainline klipper repository. 
 

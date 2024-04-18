@@ -218,7 +218,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
     min_temp: 0
     max_temp: 100
 
-### 5.4 Автоопределение Z-Offset совместно с тензодатчиками и любым датчиком BLTouch/Nicroprobe/Cartographer (! BETA !)
+### 5.4 Автоопределение Z-Offset совместно с тензодатчиками и любым датчиком BLTouch/Microprobe/Cartographer (! BETA !)
 
 Для данного функционала пришлось пропатчить клиппер для возможности работы нескольких проб одновременно, а также написать плагин (`lc_auto_z_offset.py`) для клиппера с GCODE командой для определения Z-Offset. Чтобы включить эту возможность необходимо использовать ветку [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) из репозитория модифицированного mainline клиппера. 
 
