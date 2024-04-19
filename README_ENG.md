@@ -224,7 +224,7 @@ To enable temperature monitoring you need to add sensors to `printer.cfg`:
 
 ### 5.4 Auto Z-Offset calculation with load cells probe and any BLTouch/Microprobe/Cartographer probe (! BETA !)
 
-For this functionality we had to patch the clipper to allow multiple probes to work simultaneously, as well as write a plugin (`lc_auto_z_offset.py`) for the klipper with GCODE command to determine Z-Offset. To enable this feature you need to use the [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) branch from the modified mainline klipper repository. 
+For this functionality we had to patch Klipper to allow multiple probes to work simultaneously, as well as write a plugin (`lc_auto_z_offset.py`) for Klipper with GCODE command to determine Z-Offset. To enable this feature you need to use the [multiprobe](https://github.com/cryoz/klipper/tree/multiprobe) branch from the modified mainline klipper repository. 
 
 Required config:
 
@@ -254,6 +254,7 @@ The key point is a **named** secondary probe, in this case a load cell probe nam
 Possibilities:
 - to call all commands for a probe by adding a name prefix to the command, for example a probe named `lc` can call GCode of the form LCPROBE, LCPROBE_ACCURACY and so on, while the main probe will work with standard commands (PROBE, PROBE_ACCURACY)
 - use Z-Offset autocalibration via `LC_AUTO_Z_OFFSET` command
+- use secondary probe as endstop in `[stepper_z]` section by using config like `endstop_pin: lc:z_virtual_endstop`, where `lc` - name of secondary probe
 
 `LC_AUTO_Z_OFFSET` command parameters:
 
