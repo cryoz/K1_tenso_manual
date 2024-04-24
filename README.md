@@ -265,7 +265,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 
 Пример:
 
-    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 SPEED=2
+    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 PROBE_SPEED=2
 
 В текущем положении вычисляет Z-Offset с параметрами проб в 3 попытки со скоростью 2 и сохраняет вычисленное значение в конфиг основной пробы.
 

@@ -268,7 +268,7 @@ The other parameters are passed directly to the PROBE command called by the plug
 
 Example:
 
-    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 SPEED=2
+    LC_AUTO_Z_OFFSET NOMOVE=1 SAVE=1 SAMPLES=3 PROBE_SPEED=2
 
 In the current position, calculates Z-Offset with probe parameters of 3 samples at speed 2 and stores the calculated value in the main probe config.
 
