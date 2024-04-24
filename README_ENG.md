@@ -69,7 +69,7 @@ It is necessary to backup the log file of the firmware flasher of stock firmware
 Backup the entire printer config folder again, you can use helper-script.
 
 ### 4.2 Config
-First of all, remove all `[prtouch_v2]` `[prtouch_v1]` sections from printer.cfg.
+First of all, remove all `[prtouch_v2]` `[prtouch_v1]` `[fan_feedback]` sections from printer.cfg.
 
 Correct load cells settings in `/usr/data/printer_data/config/loadcell_probe.cfg` file by taking the required pins from the channel into which you soldered the resoldered load cells from this table:
 
