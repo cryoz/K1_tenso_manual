@@ -2,6 +2,13 @@
 
 [ENGLISH VERSION](README_ENG.md)
 
+
+$${\large\textsf{\color{red}ПРЕДУПРЕЖДЕНИЕ!!!}}$$
+$${\large\textsf{\color{red}ВСЕ  ЧТО ВЫ ДЕЛАЕТЕ — ВЫ ДЕЛАЕТЕ НА СВОЙ СТРАХ И РИСК!!!}}$$
+
+
+
+
 ## 1. Железная часть. Перепайка тензодатчиков
 
 Для корректной работы датчиков в клиппере необходимо снять стол, спаять тензодатчики параллельно и воткнуть в один из слотов. Номер слота запомнить/записать, номер видно на последней картинке.
@@ -44,7 +51,7 @@ _все фото (c) ZeyHex_
 
 ## 3. Установка mainline клиппера
 
-Я использовал проект [K1-klipper](https://github.com/K1-Klipper/klipper) в большей степени из-за его легкой установки, а потом модернизировал необходимыми модулями. Но потом решил [форкнуть](https://github.com/cryoz/klipper) этот репозиторий, добавив сразу все необходимые модули от авторов [garethky](https://github.com/garethky) и [ZeyHex](https://t.me/ZeyHex)
+Я использовал проект [K1-klipper](https://github.com/K1-Klipper/klipper) в большей степени из-за его легкой установки, а потом модернизировал необходимыми модулями. Но потом решил [форкнуть](https://github.com/cryoz/klipper) этот репозиторий, добавив сразу все необходимые модули от авторов [garethky](https://github.com/garethky) и *ZeyHex*
 
 Сбэкапьте всю папку с конфигом принтера (`/usr/data/printer_data/config`), можно через helper-script.
 
@@ -197,7 +204,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 
 ### 5.3 Температурные датчики в каждом MCU
 
-[ZeyHex](https://t.me/ZeyHex) добавил в прошивку чтение температуры с каждого из mcu из встроенных датчиков - что дало возможность мониторить температуру на контроллерах стола, головы и основной платы.
+*ZeyHex* добавил в прошивку чтение температуры с каждого из mcu из встроенных датчиков - что дало возможность мониторить температуру на контроллерах стола, головы и основной платы.
 Для включения отображения температур нужно добавить сенсоры в `printer.cfg`:
 
     [temperature_sensor mcu_temp]
@@ -294,7 +301,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 ## 6. Credits
 
 Авторы всех модификаций, алгоритмов и улучшений:
-- [ZeyHex](https://t.me/ZeyHex) 
+- *ZeyHex*
 - [garethky](https://github.com/garethky)
 
 Использованные репозитории:
@@ -309,6 +316,7 @@ https://github.com/garethky/klipper/blob/adc-endstop-k1-debug/docs/Load_Cell_Pro
 Статьи и материалы:
 - https://klipper.discourse.group/t/strain-gauge-load-cell-based-endstops/2134
 - https://github.com/Klipper3d/klipper/pull/6555
+- https://www.loadcells.net/high-temperature-load-cells-connection-methods.html
 
 ___
 

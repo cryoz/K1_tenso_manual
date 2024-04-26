@@ -1,5 +1,8 @@
 # Instructions for setting up load cells on K1/K1MAX/K1C printers
 
+$${\large\textsf{\color{red}WARNING!!!}}$$
+$${\large\textsf{\color{red}EVERYTHING YOU DO IS AT YOUR OWN RISK!!!}}$$
+
 ## 1. Hardware part. load cells wiring
 
 For correct operation of the load cells it is necessary to remove the bed, solder the load cells in parallel and plug them into one of the channel connector. Remember/record the channel number, the number can be seen on the last picture.
@@ -42,7 +45,7 @@ Download them to the printer in a temporary folder, e.g. `/usr/data/tenso/fw`
 
 ## 3. Setup mainline klipper
 
-I used the [K1-klipper](https://github.com/K1-Klipper/klipper) project mostly because of its easy installation, and then modernized it with necessary modules. But then I decided to [fork](https://github.com/cryoz/klipper) this repository, adding all necessary modules from [garethky](https://github.com/garethky) and [ZeyHex](https://t.me/ZeyHex) at once
+I used the [K1-klipper](https://github.com/K1-Klipper/klipper) project mostly because of its easy installation, and then modernized it with necessary modules. But then I decided to [fork](https://github.com/cryoz/klipper) this repository, adding all necessary modules from [garethky](https://github.com/garethky) and *ZeyHex* at once
 
 Backup the entire printer config folder (`/usr/data/printer_data/config`), you can do this via helper-script.
 
@@ -200,7 +203,7 @@ And after adjusting, bring it back up to 140-150 degrees.
 
 ### 5.3 Temperature sensors in all MCUs
 
-[ZeyHex](https://t.me/ZeyHex) added to the firmware reading the temperature from each of the mcu from the built-in sensors - which made it possible to monitor the temperature on the bed, nozzle and main MCUs.
+*ZeyHex* added to the firmware reading the temperature from each of the mcu from the built-in sensors - which made it possible to monitor the temperature on the bed, nozzle and main MCUs.
 To enable temperature monitoring you need to add sensors to `printer.cfg`:
 
 
@@ -298,7 +301,7 @@ Output example:
 ## 6. Credits
 
 Authors of all modifications, algorithms and improvements:
-- [ZeyHex](https://t.me/ZeyHex) 
+- *ZeyHex*
 - [garethky](https://github.com/garethky)
 
 Used repos:
@@ -312,6 +315,7 @@ Used repos:
 References:
 - https://klipper.discourse.group/t/strain-gauge-load-cell-based-endstops/2134
 - https://github.com/Klipper3d/klipper/pull/6555
+- https://www.loadcells.net/high-temperature-load-cells-connection-methods.html
 
 ___
 
