@@ -1,6 +1,7 @@
 # Instructions for setting up load cells on K1/K1MAX/K1C printers
 
 $${\large\textsf{\color{red}WARNING!!!}}$$
+
 $${\large\textsf{\color{red}EVERYTHING YOU DO IS AT YOUR OWN RISK!!!}}$$
 
 ## 1. Hardware part. load cells wiring
