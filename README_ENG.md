@@ -19,14 +19,18 @@ _all photo by (c) ZeyHex_
 
 **Record/remember which channel number the paralleled load cells were plugged into!**
 
-**N.B.** On the K1 MAX, the board is rotated 180 degrees, not as pictured. Read the channel number either from the main large connector clockwise or refer to the inscriptions on the board:
+**N.B. 1** On the K1 MAX, the board is rotated 180 degrees, not as pictured. Read the channel number either from the main large connector clockwise or refer to the inscriptions on the board:
 ![alt text](pics/tenso_board_slots.png)
+
+**N.B. 2** You should try to make the wires from the load cells to the main connector the same length.
 
 After all operations, assemble the bed.
 
+**Important!** when assembling the table and hotbed, either replace the spacers between load cells and the hotbed with higher ones (12+ mm), or carefully arrange the re-soldered wires, especially look carefully at the main wire connection to the MCU board - with standard spacers poorly arranged wires covered with thermal insulation can push the hotbed from below, which negatively affects the correct operation of load cells, in particular, poor repeatability and significantly different accuracy in different parts of the hotbed.
+
 ## 2. Firmware part.
 
-It is necessary to build new firmware for the bed mcu, nozzle and main mcu. Either compile it yourself - or download it from [here](https://github.com/cryoz/K1_tenso_manual/tree/main/outfw)
+It is necessary to build new firmware for the bed mcu, nozzle and main mcu. Either compile it yourself - or **download it from** [**HERE**](https://github.com/cryoz/K1_tenso_manual/tree/main/outfw)
 
 For firmware compilation you need any Linux distro, here are the instructions using Debian as an example. 
 
@@ -320,4 +324,4 @@ References:
 
 ___
 
-&copy; Cryo 2024 v1.2b
+&copy; Cryo 2024 v1.3b
