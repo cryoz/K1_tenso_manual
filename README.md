@@ -122,7 +122,16 @@ _все фото (c) ZeyHex_
 
     [include loadcell_probe.cfg]
 
-После этого нужно перезапустить принтер **по питанию** - прошивки зашиваются только в этом случае.
+Вписываем в секцию `[stepper_z]` файла `printer.cfg` следующие изменения:
+Вместо:
+
+    endstop_pin: tmc2209_stepper_z:virtual_endstop# PA15   
+
+Нужно прописать:    
+
+    endstop_pin: probe:z_virtual_endstop
+
+Сохраняем. После этого нужно перезапустить принтер **по питанию** - прошивки зашиваются только в этом случае.
 
 Если клиппер выдал ошибки об устаревшем MCU - новые прошивки не зашились, смотреть лог прошивки в `/tmp/mcu_update.log`
 Если выдал ошибки по конфигам - смотреть по месту: либо переустанавливать нужные модули через helper-script либо удалять встроенные секции креалити типа prtouch_v2.
@@ -183,17 +192,6 @@ https://github.com/garethky/klipper/blob/adc-endstop/docs/Load_Cell.md#calibrati
 
     reference_tare_counts: 89146
     counts_per_gram: 25.39770
-
-Вписываем в секцию `[stepper_z]` файла `printer.cfg` следующие изменения.
-Вместо:
-
-    endstop_pin: tmc2209_stepper_z:virtual_endstop# PA15   
-
-Нужно прописать:    
-
-    endstop_pin: probe:z_virtual_endstop
-
-Сохраняем и перезапускаем клиппер.
 
 Можно пробовать хоумиться, если все успешно - снимать карту.
 
